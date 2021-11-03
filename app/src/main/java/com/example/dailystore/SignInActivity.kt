@@ -22,8 +22,16 @@ class SignInActivity : AppCompatActivity() {
         signInBtn = findViewById(R.id.signInBtn)
         signUpNav = findViewById(R.id.signUpNav)
 
+        signInBtn.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            this.finish()
+        }
+
         signUpNav.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+            this.finish()
         }
     }
 }
