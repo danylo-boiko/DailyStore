@@ -34,14 +34,14 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLoginOrEmail"
+                android:id="@+id/textInputUsernameOrEmail"
                 style="@style/parent"
-                android:layout_marginTop="@dimen/loginViewsMargin">
+                android:layout_marginTop="@dimen/authViewsMargin">
 
                 <EditText
-                    android:id="@+id/editTextLoginOrEmail"
+                    android:id="@+id/editTextUsernameOrEmail"
                     style="@style/modifiedEditText"
-                    android:hint="Login or Email"
+                    android:hint="Username or Email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -49,7 +49,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputPassword"
                 style="@style/parent"
-                android:layout_marginTop="@dimen/loginViewsMargin">
+                android:layout_marginTop="@dimen/authViewsMargin">
 
                 <EditText
                     android:id="@+id/editTextPassword"
@@ -60,6 +60,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/textViewRestorePassword"
                 style="@style/viewParent"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
@@ -68,10 +69,10 @@
                 android:textSize="@dimen/newsMoreTextSize" />
 
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-                android:id="@+id/signInButton"
+                android:id="@+id/buttonSignIn"
                 style="@style/loginButton"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/loginViewsMargin"
+                android:layout_marginTop="@dimen/authViewsMargin"
                 android:text="Sign In"
                 app:initialCornerAngle="27dp"
                 app:spinning_bar_color="#FFF"
@@ -79,9 +80,9 @@
                 app:spinning_bar_width="4dp" />
 
             <TextView
+                android:id="@+id/textViewSignUpNav"
                 style="@style/parent"
-                android:layout_marginTop="@dimen/loginViewsMargin"
-                android:onClick="onSignUpNavClick"
+                android:layout_marginTop="@dimen/authViewsMargin"
                 android:text="Need an account?"
                 android:textAlignment="center"
                 android:textColor="@color/colorSecondary"
@@ -124,11 +125,13 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/imageViewFacebookAuth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_facebook" />
 
                 <ImageView
+                    android:id="@+id/imageViewGoogleAuth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -146,12 +149,12 @@
         android:background="@drawable/ic_side_bg" />
 
     <ImageView
+        android:id="@+id/imageViewSignUpNav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="11dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="30dp"
-        android:onClick="onSignUpNavClick"
         android:src="@drawable/ic_add_img" />
 </RelativeLayout>
