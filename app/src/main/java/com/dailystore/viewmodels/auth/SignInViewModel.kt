@@ -45,18 +45,21 @@ class SignInViewModel(private val authRepository: AuthRepository) : ViewModel() 
     }
 
     fun signInFacebook() {
+        authListener?.onFailure("Todo sign in facebook")
         // TODO: 11/14/2021 Facebook sign in
     }
 
     fun signInGoogle() {
+        authListener?.onFailure("Todo sign in google")
         // TODO: 11/14/2021 Google sign in
     }
 
     fun restorePassword() {
+        authListener?.onFailure("Todo restore password")
         // TODO: 11/14/2021 Password restore
     }
 
-    fun goToSignIn(view: View) {
+    fun goToSignUp(view: View) {
         val activity = view.context as Activity
         activity.startActivity(Intent(view.context, SignUpActivity::class.java))
         activity.overridePendingTransition(R.anim.slide_in_right, R.anim.stay)

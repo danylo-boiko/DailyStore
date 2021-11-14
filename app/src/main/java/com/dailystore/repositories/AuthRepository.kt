@@ -19,7 +19,7 @@ class AuthRepository  {
         }
     }
 
-    fun register(email: String, password: String) = Completable.create { emitter ->
+    fun signUp(email: String, password: String) = Completable.create { emitter ->
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
             if (!emitter.isDisposed) {
                 if (it.isSuccessful)

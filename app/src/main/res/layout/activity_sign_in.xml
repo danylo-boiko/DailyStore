@@ -94,7 +94,7 @@
                     android:id="@+id/textViewSignUpNav"
                     style="@style/parent"
                     android:layout_marginTop="@dimen/authViewsMargin"
-                    android:onClick="@{(v) -> viewModel.goToSignIn(v)}"
+                    android:onClick="@{(v) -> viewModel.goToSignUp(v)}"
                     android:text="Need an account?"
                     android:textAlignment="center"
                     android:textColor="@color/colorSecondary"
@@ -171,7 +171,7 @@
 
         <ImageView
             android:id="@+id/imageViewSignUpNav"
-            android:onClick="@{(v) -> viewModel.goToSignIn(v)}"
+            android:onClick="@{(v) -> viewModel.goToSignUp(v)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
