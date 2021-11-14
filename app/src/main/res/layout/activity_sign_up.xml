@@ -8,7 +8,7 @@
     android:background="@color/colorSecondary"
     android:focusableInTouchMode="true"
     android:gravity="center"
-    tools:context=".SignUpActivity">
+    tools:context=".views.auth.SignUpActivity">
 
     <ScrollView
         android:layout_width="match_parent"
