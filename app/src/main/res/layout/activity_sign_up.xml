@@ -34,7 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Sign Up"
+                    android:text="@string/sign_up_logo"
                     android:textColor="@color/whiteTextColor"
                     android:textSize="35sp"
                     android:textStyle="bold" />
@@ -61,7 +61,7 @@
                                 android:id="@+id/editTextUsername"
                                 android:text="@={viewModel.username}"
                                 style="@style/modifiedEditText"
-                                android:hint="Username"
+                                android:hint="@string/sign_up_username_input"
                                 android:inputType="textPersonName"
                                 android:maxLines="1" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -75,7 +75,7 @@
                                 android:id="@+id/editTextEmail"
                                 android:text="@={viewModel.email}"
                                 style="@style/modifiedEditText"
-                                android:hint="Email"
+                                android:hint="@string/sign_up_email_input"
                                 android:inputType="textEmailAddress"
                                 android:maxLines="1" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -89,7 +89,7 @@
                                 android:id="@+id/editTextPassword"
                                 android:text="@={viewModel.password}"
                                 style="@style/modifiedEditText"
-                                android:hint="Password"
+                                android:hint="@string/sign_up_password_input"
                                 android:inputType="textPassword"
                                 android:maxLines="1" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -103,7 +103,7 @@
                                 android:id="@+id/editTextConfirmPassword"
                                 android:text="@={viewModel.confirmPassword}"
                                 style="@style/modifiedEditText"
-                                android:hint="Confirm password"
+                                android:hint="@string/sign_up_confirm_password_input"
                                 android:inputType="textPassword"
                                 android:maxLines="1" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -114,7 +114,7 @@
                             style="@style/loginButton"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/authViewsMargin"
-                            android:text="Sign Up"
+                            android:text="@string/sign_up_sign_up_button"
                             app:initialCornerAngle="27dp"
                             app:spinning_bar_color="#FFF"
                             app:spinning_bar_padding="6dp"
@@ -125,7 +125,7 @@
                             style="@style/parent"
                             android:onClick="@{(v) -> viewModel.goToSignIn(v)}"
                             android:layout_marginTop="@dimen/authViewsMargin"
-                            android:text="Already have an account?"
+                            android:text="@string/sign_up_sign_in_nav"
                             android:textAlignment="center"
                             android:textColor="@color/colorSecondary"
                             android:textSize="17sp"
@@ -151,7 +151,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:text="Use external providers"
+                        android:text="@string/sign_up_external_providers"
                         android:textAlignment="center"
                         android:textColor="@color/whiteTextColor"
                         android:textSize="12sp" />

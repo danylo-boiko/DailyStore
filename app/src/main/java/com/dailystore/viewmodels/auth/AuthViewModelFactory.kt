@@ -11,7 +11,7 @@ class AuthViewModelFactory(private val authRepository: AuthRepository) : ViewMod
         }else if (modelClass.isAssignableFrom(SignUpViewModel::class.java)){
             return SignUpViewModel(authRepository) as T
         }else{
-            throw IllegalArgumentException("Auth viewmodel not found")
+            throw IllegalArgumentException("Auth view model not found")
         }
     }
 }

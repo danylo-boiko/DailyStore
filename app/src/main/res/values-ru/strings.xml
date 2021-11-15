@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Daily Store</string>
+
+    <string name="sign_in_logo">Вход</string>
+    <string name="sign_in_email_input">Эл. адрес</string>
+    <string name="sign_in_password_input">Пароль</string>
+    <string name="sign_in_forgot_password_nav">Забыли пароль?</string>
+    <string name="sign_in_sign_in_button">Войти</string>
+    <string name="sign_in_sign_up_nav">Нужна учетная запись?</string>
+    <string name="sign_in_external_providers">Другие способы входа</string>
+
+    <string name="sign_up_logo">Регистрация</string>
+    <string name="sign_up_username_input">Ник</string>
+    <string name="sign_up_email_input">Эл. адрес</string>
+    <string name="sign_up_password_input">Пароль</string>
+    <string name="sign_up_confirm_password_input">Подтверждение пароля</string>
+    <string name="sign_up_sign_up_button">Создать</string>
+    <string name="sign_up_sign_in_nav">Уже есть аккаунт?</string>
+    <string name="sign_up_external_providers">Другие способы регистрации</string>
+</resources>

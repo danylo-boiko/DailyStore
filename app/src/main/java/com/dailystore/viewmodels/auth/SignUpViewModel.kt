@@ -30,8 +30,10 @@ class SignUpViewModel(private val authRepository: AuthRepository) : ViewModel() 
             authListener?.onFailure("Please input all values")
             return
         }
+
         authListener?.onStarted()
-        val disposable = authRepository.signUp(email!!, password!!)
+
+        val disposable = authRepository.signUp(username!!, email!!, password!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -39,6 +41,7 @@ class SignUpViewModel(private val authRepository: AuthRepository) : ViewModel() 
             }, {
                 authListener?.onFailure(it.message!!)
             })
+
         disposables.add(disposable)
     }
 

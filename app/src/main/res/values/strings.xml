@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Daily Store</string>
+
+    <string name="sign_in_logo">Sign In</string>
+    <string name="sign_in_email_input">Email</string>
+    <string name="sign_in_password_input">Password</string>
+    <string name="sign_in_forgot_password_nav">Forgot password?</string>
+    <string name="sign_in_sign_in_button">Sign In</string>
+    <string name="sign_in_sign_up_nav">Need an account?</string>
+    <string name="sign_in_external_providers">Use external providers</string>
+
+    <string name="sign_up_logo">Sign Up</string>
+    <string name="sign_up_username_input">Username</string>
+    <string name="sign_up_email_input">Email</string>
+    <string name="sign_up_password_input">Password</string>
+    <string name="sign_up_confirm_password_input">Confirm password</string>
+    <string name="sign_up_sign_up_button">Sign Up</string>
+    <string name="sign_up_sign_in_nav">Already have an account?</string>
+    <string name="sign_up_external_providers">Use external providers</string>
+
 </resources>
