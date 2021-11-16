@@ -38,8 +38,13 @@ class SignUpViewModel(private val authRepository: AuthRepository) : ViewModel() 
         }
 
         if (!(isUsernameValid(username.get()!!) and isEmailValid(email.get()!!) and
-            isPasswordValid(password.get()!!) and (password.get()!! == confirmPassword.get()!!))) {
+            isPasswordValid(password.get()!!) and  isPasswordValid(confirmPassword.get()!!))) {
             authListener?.onFailure("Not all fields are valid")
+            return
+        }
+
+        if(password.get()!! != confirmPassword.get()!!){
+            authListener?.onFailure("Password mismatch")
             return
         }
 
