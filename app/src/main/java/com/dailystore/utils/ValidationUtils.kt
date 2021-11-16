@@ -8,6 +8,14 @@ import com.wajahatkarim3.easyvalidation.core.view_ktx.maxLength
 import com.wajahatkarim3.easyvalidation.core.view_ktx.minLength
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validEmail
 
+const val minUsernameLength = 3
+const val maxUsernameLength = 32
+val usernameRegex = Regex("^[A-Za-z0-9_-]+$")
+
+const val minPasswordLength = 8
+const val maxPasswordLength = 100
+val passwordRegex = Regex("(?=.*?[0-9])(?=.*?[A-Za-z]).+")
+
 
 @BindingAdapter("emailValidator")
 fun TextInputLayout.emailValidator(email: String?) {
@@ -25,10 +33,6 @@ fun TextInputLayout.emailValidator(email: String?) {
 
 @BindingAdapter("usernameValidator")
 fun TextInputLayout.usernameValidator(username: String?) {
-    val minLength = 3
-    val maxLength = 32
-    val usernameRegex = Regex("^[A-Za-z0-9_-]+$")
-
     if (TextUtils.isEmpty(username)) {
         error = null
         return
@@ -36,9 +40,9 @@ fun TextInputLayout.usernameValidator(username: String?) {
 
     if (!username!!.matches(usernameRegex)) {
         error = resources.getString(R.string.invalid_username_regex_matches_message)
-    } else if (!username.minLength(minLength)) {
+    } else if (!username.minLength(minUsernameLength)) {
         error = resources.getString(R.string.invalid_username_min_length_message)
-    } else if (!username.maxLength(maxLength)) {
+    } else if (!username.maxLength(maxUsernameLength)) {
         error = resources.getString(R.string.invalid_username_max_length_message)
     } else {
         error = null
@@ -47,22 +51,30 @@ fun TextInputLayout.usernameValidator(username: String?) {
 
 @BindingAdapter("passwordValidator")
 fun TextInputLayout.passwordValidator(password: String?) {
-    val minLength = 8
-    val maxLength = 100
-    val usernameRegex = Regex("(?=.*?[0-9])(?=.*?[A-Za-z]).+")
-
     if (TextUtils.isEmpty(password)) {
         error = null
         return
     }
 
-    if (!password!!.matches(usernameRegex)) {
+    if (!password!!.matches(passwordRegex)) {
         error = resources.getString(R.string.invalid_password_regex_matches_message)
-    } else if (!password.minLength(minLength)) {
+    } else if (!password.minLength(minPasswordLength)) {
         error = resources.getString(R.string.invalid_password_min_length_message)
-    } else if (!password.maxLength(maxLength)) {
+    } else if (!password.maxLength(maxPasswordLength)) {
         error = resources.getString(R.string.invalid_password_max_length_message)
     } else {
         error = null
     }
+}
+
+fun isEmailValid(email: String): Boolean {
+    return email.validEmail()
+}
+
+fun isUsernameValid(username: String): Boolean {
+    return username.matches(usernameRegex) and username.minLength(minUsernameLength) and username.maxLength(maxUsernameLength)
+}
+
+fun isPasswordValid(password: String): Boolean {
+    return password.matches(passwordRegex) and password.minLength(minPasswordLength) and password.maxLength(maxPasswordLength)
 }

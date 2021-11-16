@@ -7,11 +7,15 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.dailystore.R
 import com.dailystore.repositories.AuthRepository
+import com.dailystore.utils.isEmailValid
+import com.dailystore.utils.isPasswordValid
+import com.dailystore.utils.isUsernameValid
 import com.dailystore.views.auth.AuthListener
 import com.dailystore.views.auth.SignInActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+
 
 class SignUpViewModel(private val authRepository: AuthRepository) : ViewModel() {
     var username = ObservableField<String>()
@@ -27,9 +31,15 @@ class SignUpViewModel(private val authRepository: AuthRepository) : ViewModel() 
     }
 
     fun signUpEmail() {
-        if (username.get().isNullOrEmpty() || email.get().isNullOrEmpty() ||
-            password.get().isNullOrEmpty() || confirmPassword.get().isNullOrEmpty()) {
+        if (username.get().isNullOrEmpty() or email.get().isNullOrEmpty() or
+            password.get().isNullOrEmpty() or confirmPassword.get().isNullOrEmpty()) {
             authListener?.onFailure("Please input all fields")
+            return
+        }
+
+        if (!(isUsernameValid(username.get()!!) and isEmailValid(email.get()!!) and
+            isPasswordValid(password.get()!!) and (password.get()!! == confirmPassword.get()!!))) {
+            authListener?.onFailure("Not all fields are valid")
             return
         }
 

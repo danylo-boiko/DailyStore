@@ -12,6 +12,8 @@ import io.reactivex.schedulers.Schedulers
 import android.app.Activity
 import androidx.databinding.ObservableField
 import com.dailystore.R
+import com.dailystore.utils.isEmailValid
+import com.dailystore.utils.isPasswordValid
 
 
 class SignInViewModel(private val authRepository: AuthRepository) : ViewModel() {
@@ -26,8 +28,13 @@ class SignInViewModel(private val authRepository: AuthRepository) : ViewModel() 
     }
 
     fun signInEmail() {
-        if (email.get().isNullOrEmpty() || password.get().isNullOrEmpty()) {
+        if (email.get().isNullOrEmpty() or password.get().isNullOrEmpty()) {
             authListener?.onFailure("Please input all fields")
+            return
+        }
+
+        if (!(isEmailValid(email.get()!!) and isPasswordValid(password.get()!!))) {
+            authListener?.onFailure("Not all fields are valid")
             return
         }
 
@@ -48,6 +55,11 @@ class SignInViewModel(private val authRepository: AuthRepository) : ViewModel() 
     fun resetPassword() {
         if (email.get().isNullOrEmpty()) {
             authListener?.onFailure("Please input your email")
+            return
+        }
+
+        if (!(isEmailValid(email.get()!!))) {
+            authListener?.onFailure("Please input valid email")
             return
         }
 
