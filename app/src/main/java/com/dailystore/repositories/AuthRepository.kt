@@ -51,6 +51,18 @@ class AuthRepository {
         }
     }
 
+    fun resetPassword(email: String) = Completable.create { emitter ->
+        firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener {
+            if (!emitter.isDisposed) {
+                if (it.isSuccessful) {
+                    emitter.onComplete()
+                } else {
+                    emitter.onError(it.exception!!)
+                }
+            }
+        }
+    }
+
     fun signOut() = firebaseAuth.signOut()
 
     fun currentUser() = firebaseAuth.currentUser

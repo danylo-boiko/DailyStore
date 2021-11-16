@@ -70,9 +70,9 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/textViewRestorePassword"
+                    android:id="@+id/textViewResetPassword"
                     style="@style/viewParent"
-                    android:onClick="@{() -> viewModel.restorePassword()}"
+                    android:onClick="@{() -> viewModel.resetPassword()}"
                     android:layout_gravity="end"
                     android:layout_marginTop="10dp"
                     android:text="@string/sign_in_forgot_password_nav"

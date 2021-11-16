@@ -27,6 +27,12 @@ class SignUpViewModel(private val authRepository: AuthRepository) : ViewModel() 
     }
 
     fun signUpEmail() {
+        if (username.get().isNullOrEmpty() || email.get().isNullOrEmpty() ||
+            password.get().isNullOrEmpty() || confirmPassword.get().isNullOrEmpty()) {
+            authListener?.onFailure("Please input all fields")
+            return
+        }
+
         authListener?.onStarted()
 
         val disposable = authRepository.signUp(username.get()!!, email.get()!!, password.get()!!)

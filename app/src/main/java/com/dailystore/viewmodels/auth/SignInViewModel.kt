@@ -26,9 +26,34 @@ class SignInViewModel(private val authRepository: AuthRepository) : ViewModel() 
     }
 
     fun signInEmail() {
+        if (email.get().isNullOrEmpty() || password.get().isNullOrEmpty()) {
+            authListener?.onFailure("Please input all fields")
+            return
+        }
+
         authListener?.onStarted()
 
         val disposable = authRepository.signIn(email.get()!!, password.get()!!)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                authListener?.onSuccess()
+            }, {
+                authListener?.onFailure(it.message!!)
+            })
+
+        disposables.add(disposable)
+    }
+
+    fun resetPassword() {
+        if (email.get().isNullOrEmpty()) {
+            authListener?.onFailure("Please input your email")
+            return
+        }
+
+        authListener?.onStarted()
+
+        val disposable = authRepository.resetPassword(email.get()!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -48,11 +73,6 @@ class SignInViewModel(private val authRepository: AuthRepository) : ViewModel() 
     fun signInGoogle() {
         authListener?.onFailure("Todo sign in google")
         // TODO: 11/14/2021 Google sign in
-    }
-
-    fun restorePassword() {
-        authListener?.onFailure("Todo restore password")
-        // TODO: 11/14/2021 Password restore
     }
 
     fun goToSignUp(view: View) {
