@@ -3,6 +3,7 @@ package com.dailystore.viewmodels.auth
 import android.app.Activity
 import android.content.Intent
 import android.view.View
+import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.dailystore.R
 import com.dailystore.repositories.AuthRepository
@@ -13,10 +14,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class SignUpViewModel(private val authRepository: AuthRepository) : ViewModel() {
-    var username: String? = null
-    var email: String? = null
-    var password: String? = null
-    var confirmPassword: String? = null
+    var username = ObservableField<String>()
+    var email = ObservableField<String>()
+    var password = ObservableField<String>()
+    var confirmPassword = ObservableField<String>()
     var authListener: AuthListener? = null
 
     private val disposables = CompositeDisposable()
@@ -26,14 +27,9 @@ class SignUpViewModel(private val authRepository: AuthRepository) : ViewModel() 
     }
 
     fun signUpEmail() {
-        if (username.isNullOrEmpty() || email.isNullOrEmpty() || password.isNullOrEmpty() || confirmPassword.isNullOrEmpty()) {
-            authListener?.onFailure("Please input all values")
-            return
-        }
-
         authListener?.onStarted()
 
-        val disposable = authRepository.signUp(username!!, email!!, password!!)
+        val disposable = authRepository.signUp(username.get()!!, email.get()!!, password.get()!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

@@ -16,7 +16,6 @@
         android:gravity="center"
         tools:context=".views.auth.SignInActivity">
 
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,9 +40,10 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputUsernameOrEmail"
+                    android:id="@+id/textInputEmail"
                     style="@style/parent"
-                    android:layout_marginTop="@dimen/authViewsMargin">
+                    android:layout_marginTop="@dimen/authViewsMargin"
+                    app:emailValidator="@{viewModel.email}">
 
                     <EditText
                         android:id="@+id/editTextEmail"
@@ -57,7 +57,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputPassword"
                     style="@style/parent"
-                    android:layout_marginTop="@dimen/authViewsMargin">
+                    android:layout_marginTop="@dimen/authViewsMargin"
+                    app:passwordValidator="@{viewModel.password}">
 
                     <EditText
                         android:id="@+id/editTextPassword"

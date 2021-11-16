@@ -18,4 +18,13 @@
     <string name="sign_up_sign_in_nav">Already have an account?</string>
     <string name="sign_up_external_providers">Use external providers</string>
 
+    <string name="invalid_email_format_message">Input a valid email</string>
+
+    <string name="invalid_username_regex_matches_message">Only latin letters, numbers, dashes and underscores</string>
+    <string name="invalid_username_min_length_message">Minimum 3 characters required</string>
+    <string name="invalid_username_max_length_message">Username not allow more than 32 characters</string>
+
+    <string name="invalid_password_regex_matches_message">Password must contains at least one letter and one number</string>
+    <string name="invalid_password_min_length_message">Minimum 8 characters required</string>
+    <string name="invalid_password_max_length_message">Password not allow more than 100 characters</string>
 </resources>

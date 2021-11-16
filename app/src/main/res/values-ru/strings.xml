@@ -17,4 +17,14 @@
     <string name="sign_up_sign_up_button">Создать</string>
     <string name="sign_up_sign_in_nav">Уже есть аккаунт?</string>
     <string name="sign_up_external_providers">Другие способы регистрации</string>
+
+    <string name="invalid_email_format_message">Введите действительный эл. адрес</string>
+
+    <string name="invalid_username_regex_matches_message">Поддерживаются только латинские буквы, цифры, дефисы и подчеркивания</string>
+    <string name="invalid_username_min_length_message">Необходимо минимум 3 символа</string>
+    <string name="invalid_username_max_length_message">Это поле не может содержать более 32 символов</string>
+
+    <string name="invalid_password_regex_matches_message">Пароль должен содержать хотя бы одну букву и одну цифру.</string>
+    <string name="invalid_password_min_length_message">Необходимо минимум 8 символов</string>
+    <string name="invalid_password_max_length_message">Это поле не может содержать более 100 символов</string>
 </resources>

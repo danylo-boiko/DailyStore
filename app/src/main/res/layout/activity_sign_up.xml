@@ -55,7 +55,8 @@
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/textInputUsername"
                             style="@style/parent"
-                            android:layout_marginTop="@dimen/authViewsMargin">
+                            android:layout_marginTop="@dimen/authViewsMargin"
+                            app:usernameValidator="@{viewModel.username}">
 
                             <EditText
                                 android:id="@+id/editTextUsername"
@@ -69,7 +70,8 @@
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/textInputEmail"
                             style="@style/parent"
-                            android:layout_marginTop="@dimen/authViewsMargin">
+                            android:layout_marginTop="@dimen/authViewsMargin"
+                            app:emailValidator="@{viewModel.email}">
 
                             <EditText
                                 android:id="@+id/editTextEmail"
@@ -83,7 +85,8 @@
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/textInputPassword"
                             style="@style/parent"
-                            android:layout_marginTop="@dimen/authViewsMargin">
+                            android:layout_marginTop="@dimen/authViewsMargin"
+                            app:passwordValidator="@{viewModel.password}">
 
                             <EditText
                                 android:id="@+id/editTextPassword"
@@ -97,9 +100,10 @@
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/textInputConfirmPassword"
                             style="@style/parent"
-                            android:layout_marginTop="@dimen/authViewsMargin">
+                            android:layout_marginTop="@dimen/authViewsMargin"
+                            app:passwordValidator="@{viewModel.confirmPassword}">
 
-                            <EditText
+                        <EditText
                                 android:id="@+id/editTextConfirmPassword"
                                 android:text="@={viewModel.confirmPassword}"
                                 style="@style/modifiedEditText"

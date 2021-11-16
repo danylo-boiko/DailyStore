@@ -35,8 +35,7 @@ class AuthRepository {
                     val userId = firebaseAuth.currentUser!!.uid
                     val user = User(userId, username, email)
 
-                    usersReference.child(userId)
-                        .setValue(user).addOnCompleteListener {
+                    usersReference.child(userId).setValue(user).addOnCompleteListener {
                             if (!emitter.isDisposed) {
                                 if (it.isSuccessful) {
                                     emitter.onComplete()

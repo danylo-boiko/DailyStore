@@ -10,12 +10,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import android.app.Activity
+import androidx.databinding.ObservableField
 import com.dailystore.R
 
 
 class SignInViewModel(private val authRepository: AuthRepository) : ViewModel() {
-    var email: String? = null
-    var password: String? = null
+    var email = ObservableField<String>()
+    var password = ObservableField<String>()
     var authListener: AuthListener? = null
 
     private val disposables = CompositeDisposable()
@@ -25,14 +26,9 @@ class SignInViewModel(private val authRepository: AuthRepository) : ViewModel() 
     }
 
     fun signInEmail() {
-        if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            authListener?.onFailure("Invalid email or password")
-            return
-        }
-
         authListener?.onStarted()
 
-        val disposable = authRepository.signIn(email!!, password!!)
+        val disposable = authRepository.signIn(email.get()!!, password.get()!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
