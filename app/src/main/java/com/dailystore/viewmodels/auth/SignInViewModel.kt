@@ -77,12 +77,12 @@ class SignInViewModel(private val authRepository: AuthRepository) : ViewModel() 
         disposables.add(disposable)
     }
 
-    fun signInFacebook() {
+    fun signInWithFacebook() {
         authListener?.onFailure("Todo sign in facebook")
         // TODO: 11/14/2021 Facebook sign in
     }
 
-    fun signInGoogle() {
+    fun signInWithGoogle(){
         authListener?.onFailure("Todo sign in google")
         // TODO: 11/14/2021 Google sign in
     }

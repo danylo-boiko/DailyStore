@@ -2,6 +2,7 @@ package com.dailystore
 
 import android.app.Application
 import com.dailystore.repositories.AuthRepository
+import com.dailystore.repositories.UsersRepository
 import com.dailystore.viewmodels.auth.AuthViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -15,7 +16,8 @@ class DailyStoreApplication : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidXModule(this@DailyStoreApplication))
 
+        bind() from singleton { UsersRepository() }
         bind() from singleton { AuthRepository() }
-        bind() from provider { AuthViewModelFactory(instance()) }
+        bind() from provider { AuthViewModelFactory(instance(), instance()) }
     }
 }

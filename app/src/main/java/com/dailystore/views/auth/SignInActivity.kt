@@ -15,6 +15,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
+
 class SignInActivity : AppCompatActivity(), AuthListener, KodeinAware {
     override val kodein by kodein()
     private val factory : AuthViewModelFactory by instance()

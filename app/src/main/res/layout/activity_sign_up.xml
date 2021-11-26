@@ -176,14 +176,14 @@
 
                     <ImageView
                         android:id="@+id/imageViewFacebookAuth"
-                        android:onClick="@{() -> viewModel.signUpFacebook()}"
+                        android:onClick="@{() -> viewModel.signUpWithFacebook()}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_facebook" />
 
                     <ImageView
                         android:id="@+id/imageViewGoogleAuth"
-                        android:onClick="@{() -> viewModel.signUpGoogle()}"
+                        android:onClick="@{() -> viewModel.signUpWithGoogle()}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"

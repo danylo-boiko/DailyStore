@@ -21,13 +21,16 @@ val passwordRegex = Regex("(?=.*?[0-9])(?=.*?[A-Za-z]).+")
 fun TextInputLayout.emailValidator(email: String?) {
     if (TextUtils.isEmpty(email)) {
         error = null
+        isErrorEnabled = false
         return
     }
 
     if (!email!!.validEmail()) {
         error = resources.getString(R.string.invalid_email_format_message)
+        isErrorEnabled = true
     } else {
         error = null
+        isErrorEnabled = false
     }
 }
 
@@ -35,8 +38,11 @@ fun TextInputLayout.emailValidator(email: String?) {
 fun TextInputLayout.usernameValidator(username: String?) {
     if (TextUtils.isEmpty(username)) {
         error = null
+        isErrorEnabled = false
         return
     }
+
+    isErrorEnabled = true
 
     if (!username!!.matches(usernameRegex)) {
         error = resources.getString(R.string.invalid_username_regex_matches_message)
@@ -46,6 +52,7 @@ fun TextInputLayout.usernameValidator(username: String?) {
         error = resources.getString(R.string.invalid_username_max_length_message)
     } else {
         error = null
+        isErrorEnabled = false
     }
 }
 
@@ -53,8 +60,11 @@ fun TextInputLayout.usernameValidator(username: String?) {
 fun TextInputLayout.passwordValidator(password: String?) {
     if (TextUtils.isEmpty(password)) {
         error = null
+        isErrorEnabled = false
         return
     }
+
+    isErrorEnabled = true
 
     if (!password!!.matches(passwordRegex)) {
         error = resources.getString(R.string.invalid_password_regex_matches_message)
@@ -64,6 +74,7 @@ fun TextInputLayout.passwordValidator(password: String?) {
         error = resources.getString(R.string.invalid_password_max_length_message)
     } else {
         error = null
+        isErrorEnabled = false
     }
 }
 
