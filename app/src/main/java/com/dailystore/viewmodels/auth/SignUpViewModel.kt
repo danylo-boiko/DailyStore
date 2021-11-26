@@ -6,7 +6,9 @@ import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.dailystore.R
+import com.dailystore.models.User
 import com.dailystore.repositories.AuthRepository
+import com.dailystore.repositories.UsersRepository
 import com.dailystore.utils.isEmailValid
 import com.dailystore.utils.isPasswordValid
 import com.dailystore.utils.isUsernameValid
@@ -17,7 +19,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 
-class SignUpViewModel(private val authRepository: AuthRepository) : ViewModel() {
+class SignUpViewModel(private val authRepository: AuthRepository, private val usersRepository: UsersRepository) : ViewModel() {
     var username = ObservableField<String>()
     var email = ObservableField<String>()
     var password = ObservableField<String>()
@@ -50,7 +52,8 @@ class SignUpViewModel(private val authRepository: AuthRepository) : ViewModel() 
 
         authListener?.onStarted()
 
-        val disposable = authRepository.signUp(username.get()!!, email.get()!!, password.get()!!)
+        val disposable = authRepository.signUp(email.get()!!, password.get()!!)
+            .andThen(usersRepository.create(User(user!!.uid, username.get()!!, email.get()!!)))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -62,12 +65,12 @@ class SignUpViewModel(private val authRepository: AuthRepository) : ViewModel() 
         disposables.add(disposable)
     }
 
-    fun signUpFacebook() {
+    fun signUpWithFacebook() {
         authListener?.onFailure("Todo sign up facebook")
         // TODO: 11/14/2021 Facebook sign up
     }
 
-    fun signUpGoogle() {
+    fun signUpWithGoogle() {
         authListener?.onFailure("Todo sign up google")
         // TODO: 11/14/2021 Google sign up
     }
