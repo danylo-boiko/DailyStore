@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Daily Store</string>
+    <string name="facebook_app_id">604285440716916</string>
+    <string name="fb_login_protocol_scheme">fb604285440716916</string>
 
     <string name="sign_in_logo">Sign In</string>
     <string name="sign_in_email_input">Email</string>

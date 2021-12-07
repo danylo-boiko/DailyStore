@@ -16,14 +16,19 @@ import com.dailystore.Settings
 import com.dailystore.databinding.ActivitySignInBinding
 import com.dailystore.viewmodels.auth.AuthViewModelFactory
 import com.dailystore.viewmodels.auth.SignInViewModel
+import com.facebook.*
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.GoogleAuthProvider
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
+import java.util.*
 
 
 class SignInActivity : AppCompatActivity(), AuthListener, KodeinAware {
@@ -32,6 +37,7 @@ class SignInActivity : AppCompatActivity(), AuthListener, KodeinAware {
 
     private lateinit var signInViewModel: SignInViewModel
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var callbackManager: CallbackManager
 
     private val progressbar: ProgressBar by lazy {
         findViewById(R.id.progressbar)
@@ -42,6 +48,7 @@ class SignInActivity : AppCompatActivity(), AuthListener, KodeinAware {
 
         initViewModel()
         initGoogleSignInClient()
+        initFacebookSignIn()
         initButtons()
     }
 
@@ -61,10 +68,35 @@ class SignInActivity : AppCompatActivity(), AuthListener, KodeinAware {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
     }
 
+    private fun initFacebookSignIn() {
+        callbackManager = CallbackManager.Factory.create()
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+                    val credential = FacebookAuthProvider.getCredential(loginResult.accessToken.token)
+                    signInViewModel.signInWithExternalAuthProvider(credential)
+                }
+
+                override fun onCancel() {
+                    Log.d("Facebook sign in error", "Facebook onCancel.")
+                }
+
+                override fun onError(error: FacebookException) {
+                    Log.d("Facebook sign in error", "Facebook onError.")
+                }
+            }
+        )
+    }
+
     private fun initButtons() {
         findViewById<ImageView>(R.id.imageViewGoogleAuth).setOnClickListener {
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, Settings.GOOGLE_RC_SIGN_IN)
+        }
+
+        findViewById<ImageView>(R.id.imageViewFacebookAuth).setOnClickListener {
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("public_profile", "email"))
         }
 
         val signUpNavClickListener = View.OnClickListener {
@@ -85,12 +117,15 @@ class SignInActivity : AppCompatActivity(), AuthListener, KodeinAware {
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 val credential = GoogleAuthProvider.getCredential(account.idToken!!, null)
-                signInViewModel.signInWithGoogle(credential)
+                signInViewModel.signInWithExternalAuthProvider(credential)
             } catch (e: ApiException) {
                 Log.w("Google sign in error", e.message!!)
             }
+        }else if(requestCode == Settings.FACEBOOK_RC_SIGN_IN) {
+            callbackManager.onActivityResult(requestCode, resultCode, data)
         }
     }
+
 
     override fun onStarted() {
         progressbar.visibility = View.VISIBLE

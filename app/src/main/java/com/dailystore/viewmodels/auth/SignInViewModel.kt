@@ -73,15 +73,10 @@ class SignInViewModel(private val authRepository: AuthRepository) : ViewModel() 
         disposables.add(disposable)
     }
 
-    fun signInWithFacebook() {
-        authListener?.onFailure("Todo sign in facebook")
-        // TODO: 11/14/2021 Facebook sign in
-    }
-
-    fun signInWithGoogle(googleAuthCredential: AuthCredential){
+    fun signInWithExternalAuthProvider(authCredential: AuthCredential){
         authListener?.onStarted()
 
-        val disposable = authRepository.signInWithGoogle(googleAuthCredential)
+        val disposable = authRepository.signInWithExternalAuthProvider(authCredential)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

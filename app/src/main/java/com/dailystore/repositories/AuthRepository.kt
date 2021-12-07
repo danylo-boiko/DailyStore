@@ -21,8 +21,8 @@ class AuthRepository {
         }
     }
 
-    fun signInWithGoogle(googleAuthCredential: AuthCredential) = Completable.create { emitter ->
-        firebaseAuth.signInWithCredential(googleAuthCredential).addOnCompleteListener {
+    fun signInWithExternalAuthProvider(authCredential: AuthCredential) = Completable.create { emitter ->
+        firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener {
             if (it.isSuccessful) {
                 emitter.onComplete()
             } else {
