@@ -119,6 +119,7 @@ class SignInActivity : AppCompatActivity(), AuthListener, KodeinAware {
                 val account = task.getResult(ApiException::class.java)!!
                 val credential = GoogleAuthProvider.getCredential(account.idToken!!, null)
                 signInViewModel.signInWithExternalAuthProvider(credential)
+                googleSignInClient.signOut()
             } catch (e: ApiException) {
                 Log.w("Google sign in error", e.message!!)
             }
