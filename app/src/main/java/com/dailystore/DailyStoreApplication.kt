@@ -4,6 +4,7 @@ import android.app.Application
 import com.dailystore.repositories.AuthRepository
 import com.dailystore.repositories.UsersRepository
 import com.dailystore.viewmodels.auth.AuthViewModelFactory
+import com.dailystore.viewmodels.home.HomeViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -19,5 +20,6 @@ class DailyStoreApplication : Application(), KodeinAware {
         bind() from singleton { UsersRepository() }
         bind() from singleton { AuthRepository() }
         bind() from provider { AuthViewModelFactory(instance(), instance()) }
+        bind() from provider { HomeViewModelFactory(instance()) }
     }
 }

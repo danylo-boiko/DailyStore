@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel" type="com.dailystore.viewmodels.home.HomeViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@color/whiteTextColor"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        tools:context=".views.auth.SignInActivity">
+
+        <Button
+            android:id="@+id/buttonLogout"
+            android:onClick="@{(v) -> viewModel.logout(v)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:text="Logout" />
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+</layout>

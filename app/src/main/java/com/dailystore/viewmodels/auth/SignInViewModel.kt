@@ -1,19 +1,15 @@
 package com.dailystore.viewmodels.auth
 
-import android.content.Intent
-import android.view.View
 import androidx.lifecycle.ViewModel
 import com.dailystore.repositories.AuthRepository
 import com.dailystore.views.auth.AuthListener
-import com.dailystore.views.auth.SignUpActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import android.app.Activity
 import androidx.databinding.ObservableField
-import com.dailystore.R
 import com.dailystore.utils.isEmailValid
 import com.dailystore.utils.isPasswordValid
+import com.google.firebase.auth.AuthCredential
 
 
 class SignInViewModel(private val authRepository: AuthRepository) : ViewModel() {
@@ -77,21 +73,19 @@ class SignInViewModel(private val authRepository: AuthRepository) : ViewModel() 
         disposables.add(disposable)
     }
 
-    fun signInWithFacebook() {
-        authListener?.onFailure("Todo sign in facebook")
-        // TODO: 11/14/2021 Facebook sign in
-    }
+    fun signInWithExternalAuthProvider(authCredential: AuthCredential){
+        authListener?.onStarted()
 
-    fun signInWithGoogle(){
-        authListener?.onFailure("Todo sign in google")
-        // TODO: 11/14/2021 Google sign in
-    }
+        val disposable = authRepository.signInWithExternalAuthProvider(authCredential)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                authListener?.onSuccess()
+            }, {
+                authListener?.onFailure(it.message!!)
+            })
 
-    fun goToSignUp(view: View) {
-        val activity = view.context as Activity
-        activity.startActivity(Intent(view.context, SignUpActivity::class.java))
-        activity.overridePendingTransition(R.anim.slide_in_right, R.anim.stay)
-        activity.finish()
+        disposables.add(disposable)
     }
 
     override fun onCleared() {

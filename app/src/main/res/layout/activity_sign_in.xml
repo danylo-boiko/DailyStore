@@ -95,7 +95,6 @@
                     android:id="@+id/textViewSignUpNav"
                     style="@style/parent"
                     android:layout_marginTop="@dimen/authViewsMargin"
-                    android:onClick="@{(v) -> viewModel.goToSignUp(v)}"
                     android:text="@string/sign_in_sign_up_nav"
                     android:textAlignment="center"
                     android:textColor="@color/colorSecondary"
@@ -139,14 +138,12 @@
 
                     <ImageView
                         android:id="@+id/imageViewFacebookAuth"
-                        android:onClick="@{() -> viewModel.signInWithFacebook()}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_facebook" />
 
                     <ImageView
                         android:id="@+id/imageViewGoogleAuth"
-                        android:onClick="@{() -> viewModel.signInWithGoogle()}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -172,7 +169,6 @@
 
         <ImageView
             android:id="@+id/imageViewSignUpNav"
-            android:onClick="@{(v) -> viewModel.goToSignUp(v)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
