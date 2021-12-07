@@ -16,6 +16,7 @@ import com.dailystore.Settings
 import com.dailystore.databinding.ActivitySignInBinding
 import com.dailystore.viewmodels.auth.AuthViewModelFactory
 import com.dailystore.viewmodels.auth.SignInViewModel
+import com.dailystore.views.home.HomeActivity
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
@@ -126,14 +127,15 @@ class SignInActivity : AppCompatActivity(), AuthListener, KodeinAware {
         }
     }
 
-
     override fun onStarted() {
         progressbar.visibility = View.VISIBLE
     }
 
     override fun onSuccess() {
         progressbar.visibility = View.GONE
-        Toast.makeText(this, signInViewModel.user?.email, Toast.LENGTH_SHORT).show()
+
+        startActivity(Intent(this, HomeActivity::class.java))
+        this.finish()
     }
 
     override fun onFailure(message: String) {
@@ -144,7 +146,8 @@ class SignInActivity : AppCompatActivity(), AuthListener, KodeinAware {
     override fun onStart() {
         super.onStart()
         signInViewModel.user?.let {
-            Toast.makeText(this, signInViewModel.user?.email, Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, HomeActivity::class.java))
+            this.finish()
         }
     }
 }
