@@ -1,5 +1,6 @@
 package com.dailystore.repositories
 
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import io.reactivex.Completable
 
@@ -16,6 +17,16 @@ class AuthRepository {
                 } else {
                     emitter.onError(it.exception!!)
                 }
+            }
+        }
+    }
+
+    fun signInWithGoogle(googleAuthCredential: AuthCredential) = Completable.create { emitter ->
+        firebaseAuth.signInWithCredential(googleAuthCredential).addOnCompleteListener {
+            if (it.isSuccessful) {
+                emitter.onComplete()
+            } else {
+                emitter.onError(it.exception!!)
             }
         }
     }

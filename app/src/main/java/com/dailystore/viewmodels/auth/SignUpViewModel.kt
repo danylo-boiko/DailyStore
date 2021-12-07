@@ -1,11 +1,7 @@
 package com.dailystore.viewmodels.auth
 
-import android.app.Activity
-import android.content.Intent
-import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
-import com.dailystore.R
 import com.dailystore.models.User
 import com.dailystore.repositories.AuthRepository
 import com.dailystore.repositories.UsersRepository
@@ -13,7 +9,6 @@ import com.dailystore.utils.isEmailValid
 import com.dailystore.utils.isPasswordValid
 import com.dailystore.utils.isUsernameValid
 import com.dailystore.views.auth.AuthListener
-import com.dailystore.views.auth.SignInActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -63,23 +58,6 @@ class SignUpViewModel(private val authRepository: AuthRepository, private val us
             })
 
         disposables.add(disposable)
-    }
-
-    fun signUpWithFacebook() {
-        authListener?.onFailure("Todo sign up facebook")
-        // TODO: 11/14/2021 Facebook sign up
-    }
-
-    fun signUpWithGoogle() {
-        authListener?.onFailure("Todo sign up google")
-        // TODO: 11/14/2021 Google sign up
-    }
-
-    fun goToSignIn(view: View) {
-        val activity = view.context as Activity
-        activity.startActivity(Intent(view.context, SignInActivity::class.java))
-        activity.overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right)
-        activity.finish()
     }
 
     override fun onCleared() {

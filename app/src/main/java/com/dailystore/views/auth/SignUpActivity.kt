@@ -1,9 +1,12 @@
 package com.dailystore.views.auth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -21,18 +24,35 @@ class SignUpActivity : AppCompatActivity(), AuthListener, KodeinAware {
     private val factory : AuthViewModelFactory by instance()
 
     private lateinit var signUpViewModel: SignUpViewModel
-    private lateinit var progressbar: ProgressBar
+
+    private val progressbar: ProgressBar by lazy {
+        findViewById(R.id.progressbar)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initViewModel()
+        initButtons()
+    }
+
+    private fun initViewModel() {
         val binding: ActivitySignUpBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
         signUpViewModel = ViewModelProvider(this, factory).get(SignUpViewModel::class.java)
         binding.viewModel = signUpViewModel
 
         signUpViewModel.authListener = this
+    }
 
-        progressbar = findViewById(R.id.progressbar)
+    private fun initButtons() {
+        val signInNavClickListener = View.OnClickListener {
+            startActivity(Intent(this, SignInActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right)
+            this.finish()
+        }
+
+        findViewById<ImageView>(R.id.imageViewSignInNav).setOnClickListener(signInNavClickListener)
+        findViewById<TextView>(R.id.textViewSignInNav).setOnClickListener(signInNavClickListener)
     }
 
     override fun onStarted() {
